@@ -31,7 +31,7 @@ Projeto referente à disciplina Programação Avançada (DCA-1202) 2020.6
   ## Este é um exemplo que foi criado, gravado no arquivo escultura.off:<br><br>
   
   ![alt text](https://github.com/JeffersonEstevo/Projeto-Programacao-Avancada-UnidadeII-2020.6/raw/master/parte1/img/vista-frontal.png)<br>
-  ![alt text](https://github.com/JeffersonEstevo/Projeto-Programacao-Avancada-UnidadeII-2020.6/tree/master/parte1/img/vista-perspectiva.png)<br>
-  ![alt text](https://github.com/JeffersonEstevo/Projeto-Programacao-Avancada-UnidadeII-2020.6/tree/master/parte1/img/vista-lateral.png)<br>
-  ![alt text](https://github.com/JeffersonEstevo/Projeto-Programacao-Avancada-UnidadeII-2020.6/tree/master/parte1/img/vista-superior.png)<br>
+  ![alt text](https://github.com/JeffersonEstevo/Projeto-Programacao-Avancada-UnidadeII-2020.6/raw/master/parte1/img/vista-perspectiva.png)<br>
+  ![alt text](https://github.com/JeffersonEstevo/Projeto-Programacao-Avancada-UnidadeII-2020.6/raw/master/parte1/img/vista-lateral.png)<br>
+  ![alt text](https://github.com/JeffersonEstevo/Projeto-Programacao-Avancada-UnidadeII-2020.6/raw/master/parte1/img/vista-superior.png)<br>
  
