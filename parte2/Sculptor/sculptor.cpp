@@ -58,76 +58,84 @@ void Sculptor::cutVoxel(int x, int y, int z)
      v[x][y][z].isOn = false;
 }
 
+void Sculptor::writeOFF(char* filename){
+    ofstream fout;
 
-void Sculptor::writeOFF(char *filename)
-{
-      std::ofstream fout;
-      std::fixed(fout);
-      char *nomeArq;
-      nomeArq = filename;
-      fout.open(nomeArq);
+    fixed(fout); // para corrigir precisão de casas decimais no arquivo .OFF
 
-      if(!fout.is_open()){
-          exit(0);
-      }
+    int Nvertices=0;
+    int Nfaces=0;
+    int aux=0;
+    fout.open(filename);
 
-      fout << "OFF\n";
+    if(fout.is_open()){
+        cout << "Aguarde...Salvando o arquivo OFF.\n";
+    }
+    else{
+        cout << "Arquivo OFF nao foi aberto\n";
+        exit(1);
+    }
 
-      int numBlocosON = nx*ny*nz;
+    fout<<"OFF"<<endl;
 
-      for(int i=0;i<nx;i++){
-          for(int j=0;j<ny;j++){
-              for(int k=0;k<nz;k++){
-                  if(v[i][j][k].isOn==false){
-                      numBlocosON--;
-                  }
-              }
-          }
-      }
-
-      fout << numBlocosON*8 << " " << numBlocosON*6 << " " << 0 << endl;
-
-           for(int i=0;i<nx;i++){
-                for(int j=0;j<ny;j++){
-                    for(int k=0;k<nz;k++){
-                        if(v[i][j][k].isOn==false){
-
-                        }else{
-                            fout << k-0.5 << " " << j+0.5 << " " << i-0.5 << endl;
-                            fout << k-0.5 << " " << j-0.5 << " " << i-0.5 << endl;
-                            fout << k+0.5 << " " << j-0.5 << " " << i-0.5 << endl;
-                            fout << k+0.5 << " " << j+0.5 << " " << i-0.5 << endl;
-                            fout << k-0.5 << " " << j+0.5 << " " << i+0.5 << endl;
-                            fout << k-0.5 << " " << j-0.5 << " " << i+0.5 << endl;
-                            fout << k+0.5 << " " << j-0.5 << " " << i+0.5 << endl;
-                            fout << k+0.5 << " " << j+0.5 << " " << i+0.5 << endl;
-                        }
-                    }
+    for(int i=0;i<nx;i++){
+        for(int j=0;j<ny;j++){
+            for(int k=0;k<nz;k++){
+                if(v[i][j][k].isOn){
+                    Nvertices=Nvertices+8;
+                    Nfaces=Nfaces+6;
                 }
             }
+        }
+    }
 
-           int cont = 0;
-           for(int i=0;i<nx;i++){
-                for(int j=0;j<ny;j++){
-                    for(int k=0;k<nz;k++){
-                        if(v[i][j][k].isOn==false){
+    fout<<Nvertices<<" "<<Nfaces<<" "<<0<<endl;
 
-                        }else{
-                            int pv = 8*cont;
-                            fout << "4" << " " << pv << " " << pv+3 << " " << pv+2 << " " << pv+1 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << endl;
-                            fout << "4" << " " << pv+4 << " " << pv+5 << " " << pv+6 << " " << pv+7 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << endl;
-                            fout << "4" << " " << pv << " " << pv+1 << " " << pv+5 << " " << pv+4 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << endl;
-                            fout << "4" << " " << pv << " " << pv+4 << " " << pv+7 << " " << pv+3 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << endl;
-                            fout << "4" << " " << pv+3 << " " << pv+7 << " " << pv+6 << " " << pv+2 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << endl;
-                            fout << "4" << " " << pv+1 << " " << pv+2 << " " << pv+6 << " " << pv+5 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << endl;
-                            cont++;
-                        }
-                    }
+
+    for(int i=0;i<nx;i++){
+        for(int j=0;j<ny;j++){
+            for(int k=0;k<nz;k++){
+                if(v[i][j][k].isOn){
+
+
+                        fout<<i-0.5<<" "<<j+0.5<<" "<<k-0.5<<endl;
+                        fout<<i-0.5<<" "<<j-0.5<<" "<<k-0.5<<endl;
+                        fout<<i+0.5<<" "<<j-0.5<<" "<<k-0.5<<endl;
+                        fout<<i+0.5<<" "<<j+0.5<<" "<<k-0.5<<endl;
+                        fout<<i-0.5<<" "<<j+0.5<<" "<<k+0.5<<endl;
+                        fout<<i-0.5<<" "<<j-0.5<<" "<<k+0.5<<endl;
+                        fout<<i+0.5<<" "<<j-0.5<<" "<<k+0.5<<endl;
+                        fout<<i+0.5<<" "<<j+0.5<<" "<<k+0.5<<endl;
+
                 }
             }
+        }
+    }
 
+    for(int i=0;i<nx;i++){
+        for(int j=0;j<ny;j++){
+            for(int k=0;k<nz;k++){
+                if(v[i][j][k].isOn){
+                    fout<<4<<" "<<aux+0<<" "<<aux+3<<" "<<aux+2<<" "<<aux+1<<" "<<v[i][j][k].r<<" "
+                    <<v[i][j][k].g<<" "<<v[i][j][k].b<<" "<<v[i][j][k].a<<endl;
+                    fout<<4<<" "<<aux+4<<" "<<aux+5<<" "<<aux+6<<" "<<aux+7<<" "<<v[i][j][k].r<<" "
+                    <<v[i][j][k].g<<" "<<v[i][j][k].b<<" "<<v[i][j][k].a<<endl;
+                    fout<<4<<" "<<aux+0<<" "<<aux+1<<" "<<aux+5<<" "<<aux+4<<" "<<v[i][j][k].r<<" "
+                    <<v[i][j][k].g<<" "<<v[i][j][k].b<<" "<<v[i][j][k].a<<endl;
+                    fout<<4<<" "<<aux+0<<" "<<aux+4<<" "<<aux+7<<" "<<aux+3<<" "<<v[i][j][k].r<<" "
+                    <<v[i][j][k].g<<" "<<v[i][j][k].b<<" "<<v[i][j][k].a<<endl;
+                    fout<<4<<" "<<aux+3<<" "<<aux+7<<" "<<aux+6<<" "<<aux+2<<" "<<v[i][j][k].r<<" "
+                    <<v[i][j][k].g<<" "<<v[i][j][k].b<<" "<<v[i][j][k].a<<endl;
+                    fout<<4<<" "<<aux+1<<" "<<aux+2<<" "<<aux+6<<" "<<aux+5<<" "<<v[i][j][k].r<<" "
+                    <<v[i][j][k].g<<" "<<v[i][j][k].b<<" "<<v[i][j][k].a<<endl;
+                    aux=aux+8;
+                }
+            }
+        }
+    }
 
-            fout.close();
-
+    if(fout.is_open()){
+        cout << "Arquivo.OFF salvo com sucesso!"<<endl;
+    }
 
 }
